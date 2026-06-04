@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>She Can Foundation | GOVT. REG. NGO</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --rose:  #c0687a;
+      --deep:  #8b3a4f;
+      --blush: #f5dde3;
+      --cream: #fdf6f0;
+      --bark:  #3b2a2a;
+      --leaf:  #6b8c6a;
+      --gold:  #d4a853;
+      --white: #ffffff;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--bark); overflow-x: hidden; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 200;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.1rem 6%;
+      background: rgba(253,246,240,.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(192,104,122,.15);
+      animation: slideDown .6s ease both;
+    }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--rose); letter-spacing: .02em; }
+    .nav-reg { font-size: .7rem; color: #7a6060; font-weight: 400; letter-spacing: .05em; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--bark); font-weight: 500; font-size: .88rem; letter-spacing: .07em; text-transform: uppercase; position: relative; transition: color .3s; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 2px; background: var(--rose); transition: width .3s; }
+    .nav-links a:hover { color: var(--rose); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-donate { background: var(--rose); color: var(--white) !important; padding: .5rem 1.4rem; border-radius: 99px; transition: background .3s, transform .2s !important; }
+    .nav-donate:hover { background: var(--deep) !important; transform: translateY(-2px); }
+    .nav-donate::after { display: none !important; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 7rem 6% 4rem;
+      gap: 4rem;
+      background:
+        radial-gradient(ellipse 60% 70% at 90% 30%, rgba(192,104,122,.18) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 5% 85%, rgba(107,140,106,.13) 0%, transparent 55%),
+        var(--cream);
+      position: relative; overflow: hidden;
+    }
+    .hero-text { animation: fadeUp .9s .2s ease both; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: .6rem;
+      background: var(--blush); color: var(--rose);
+      font-size: .73rem; font-weight: 600; letter-spacing: .12em;
+      text-transform: uppercase; padding: .45rem 1.2rem;
+      border-radius: 99px; margin-bottom: 1.6rem;
+    }
+    .hero-badge .dot { display: inline-block; width: 6px; height: 6px; background: var(--rose); border-radius: 50%; animation: pulse 1.6s infinite; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.6rem, 5vw, 4.4rem); line-height: 1.12; margin-bottom: 1.4rem; }
+    .hero h1 em { font-style: italic; color: var(--rose); }
+    .hero-desc { font-size: 1.05rem; font-weight: 300; line-height: 1.8; color: #6b5353; margin-bottom: 2.2rem; max-width: 460px; }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    /* BUTTONS */
+    .btn-primary { display: inline-block; background: var(--rose); color: var(--white); padding: .85rem 2.4rem; border-radius: 99px; font-size: .95rem; font-weight: 500; text-decoration: none; border: none; cursor: pointer; transition: transform .25s, box-shadow .25s, background .25s; box-shadow: 0 6px 24px rgba(192,104,122,.4); }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(192,104,122,.5); background: var(--deep); }
+    .btn-outline { display: inline-block; background: transparent; color: var(--rose); border: 2px solid var(--rose); padding: .82rem 2.2rem; border-radius: 99px; font-size: .95rem; font-weight: 500; text-decoration: none; cursor: pointer; transition: all .25s; }
+    .btn-outline:hover { background: var(--rose); color: var(--white); transform: translateY(-3px); }
+
+    /* HERO VISUAL */
+    .hero-visual { position: relative; animation: fadeUp .9s .45s ease both; }
+    .hero-img-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 200px 200px; gap: 12px; }
+    .gi { border-radius: 18px; overflow: hidden; box-shadow: 0 10px 30px rgba(59,42,42,.15); }
+    .gi img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+    .gi:hover img { transform: scale(1.07); }
+    .gi-tall { grid-row: span 2; }
+    .hero-ribbon {
+      position: absolute; bottom: -20px; left: -16px;
+      background: var(--rose); color: var(--white);
+      border-radius: 16px; padding: 1rem 1.4rem;
+      font-size: .85rem; font-weight: 500;
+      box-shadow: 0 8px 24px rgba(192,104,122,.45);
+      animation: floatY 3s ease-in-out infinite alternate;
+    }
+    .hero-ribbon strong { display: block; font-size: 1.6rem; font-family: 'Playfair Display', serif; line-height: 1; }
+
+    /* TICKER */
+    .ticker { background: var(--bark); color: var(--white); padding: .85rem 0; overflow: hidden; }
+    .ticker-inner { display: flex; width: max-content; animation: tickerScroll 26s linear infinite; }
+    .ticker-item { white-space: nowrap; padding: 0 2.5rem; font-size: .83rem; letter-spacing: .1em; text-transform: uppercase; opacity: .8; }
+    .ticker-item::before { content: '✦'; margin-right: 1.2rem; color: var(--rose); }
+
+    /* IMPACT */
+    .impact { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid rgba(192,104,122,.15); border-bottom: 1px solid rgba(192,104,122,.15); }
+    .impact-item { padding: 3rem 2rem; text-align: center; border-right: 1px solid rgba(192,104,122,.15); position: relative; overflow: hidden; transition: background .3s; }
+    .impact-item:last-child { border-right: none; }
+    .impact-item:hover { background: var(--blush); }
+    .impact-item::before { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--rose), var(--gold)); transform: scaleX(0); transform-origin: left; transition: transform .4s; }
+    .impact-item:hover::before { transform: scaleX(1); }
+    .impact-item .num { font-family: 'Playfair Display', serif; font-size: 2.8rem; color: var(--rose); line-height: 1; }
+    .impact-item p { font-size: .82rem; letter-spacing: .1em; text-transform: uppercase; color: #7a6060; margin-top: .5rem; }
+
+    /* CORE ISSUE SECTION */
+    .issue-section {
+      padding: 6rem 6%;
+      background: var(--bark);
+      color: var(--white);
+      position: relative; overflow: hidden;
+    }
+    .issue-section::before {
+      content: '"';
+      font-family: 'Playfair Display', serif;
+      font-size: 22rem; line-height: 1;
+      position: absolute; top: -4rem; left: 2%;
+      color: rgba(255,255,255,.03);
+      pointer-events: none;
+    }
+    .issue-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .issue-text .section-tag { background: rgba(192,104,122,.25); color: var(--blush); }
+    .issue-text h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); color: var(--white); margin: 1rem 0 1.4rem; line-height: 1.25; }
+    .issue-text p { color: rgba(255,255,255,.75); font-weight: 300; line-height: 1.85; margin-bottom: 1rem; font-size: 1rem; }
+    .issue-stats { display: flex; flex-direction: column; gap: 1.2rem; margin-top: 1.8rem; }
+    .issue-stat { background: rgba(255,255,255,.07); border: 1px solid rgba(192,104,122,.25); border-radius: 14px; padding: 1.2rem 1.6rem; display: flex; align-items: center; gap: 1rem; transition: background .3s; }
+    .issue-stat:hover { background: rgba(192,104,122,.15); }
+    .issue-stat .stat-icon { font-size: 1.6rem; flex-shrink: 0; }
+    .issue-stat p { color: rgba(255,255,255,.8); font-size: .92rem; line-height: 1.5; margin: 0; }
+    .issue-stat strong { color: var(--blush); }
+    .issue-img { position: relative; }
+    .issue-img img { width: 100%; border-radius: 22px; box-shadow: 0 20px 60px rgba(0,0,0,.3); }
+    .issue-quote {
+      position: absolute; bottom: -22px; right: -18px;
+      background: var(--rose); color: var(--white);
+      border-radius: 16px; padding: 1.2rem 1.6rem;
+      max-width: 220px;
+      font-size: .85rem; font-weight: 500; line-height: 1.5;
+      box-shadow: 0 8px 28px rgba(192,104,122,.5);
+      animation: floatY 3.5s ease-in-out infinite alternate;
+    }
+
+    /* GALLERY */
+    .gallery-section { padding: 6rem 6%; }
+    .section-header { text-align: center; margin-bottom: 3.5rem; }
+    .section-tag { display: inline-block; background: var(--blush); color: var(--rose); font-size: .73rem; letter-spacing: .12em; text-transform: uppercase; padding: .4rem 1.2rem; border-radius: 99px; margin-bottom: 1rem; font-weight: 600; }
+    .section-header h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); line-height: 1.25; }
+    .section-header p { color: #7a6060; margin-top: .8rem; font-weight: 300; font-size: 1rem; }
+    .photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: 260px 260px; gap: 16px; }
+    .photo-card { position: relative; border-radius: 20px; overflow: hidden; cursor: pointer; }
+    .photo-card img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s; }
+    .photo-card:hover img { transform: scale(1.08); }
+    .photo-card .overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(59,42,42,.75) 0%, transparent 50%); opacity: 0; transition: opacity .4s; display: flex; align-items: flex-end; padding: 1.4rem; }
+    .photo-card:hover .overlay { opacity: 1; }
+    .overlay-text { color: var(--white); }
+    .overlay-text h4 { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: .3rem; }
+    .overlay-text p { font-size: .82rem; opacity: .8; }
+    .photo-card-wide { grid-column: span 2; }
+
+    /* ABOUT */
+    #about { padding: 6rem 6%; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .about-img { position: relative; }
+    .about-img img { width: 100%; border-radius: 24px; box-shadow: 0 20px 60px rgba(59,42,42,.15); }
+    .about-badge { position: absolute; bottom: -18px; right: -18px; background: var(--gold); color: var(--bark); border-radius: 50%; width: 110px; height: 110px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: 700; box-shadow: 0 8px 28px rgba(212,168,83,.4); animation: spinSlow 14s linear infinite; text-align: center; }
+    .about-badge span { font-size: 1.4rem; font-family: 'Playfair Display', serif; line-height: 1; }
+    .about-badge small { font-size: .58rem; letter-spacing: .08em; text-transform: uppercase; padding: 0 .3rem; text-align: center; }
+    .about-content h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); margin: 1rem 0 1.2rem; line-height: 1.3; }
+    .about-content p { color: #6b5353; line-height: 1.85; font-weight: 300; margin-bottom: 1rem; }
+    .about-list { list-style: none; margin: 1.5rem 0 2rem; display: flex; flex-direction: column; gap: .7rem; }
+    .about-list li { display: flex; align-items: center; gap: .8rem; font-size: .95rem; }
+    .about-list li::before { content: '✓'; width: 24px; height: 24px; background: var(--blush); color: var(--rose); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .78rem; flex-shrink: 0; }
+
+    /* MISSION CARDS */
+    .mission { padding: 6rem 6%; background: var(--blush); }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; margin-top: 3rem; }
+    .card { background: var(--white); border-radius: 20px; padding: 2.2rem 1.8rem; text-align: center; box-shadow: 0 4px 20px rgba(59,42,42,.06); transition: transform .3s, box-shadow .3s; position: relative; overflow: hidden; }
+    .card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--rose), var(--gold)); transform: scaleX(0); transform-origin: left; transition: transform .4s; }
+    .card:hover { transform: translateY(-8px); box-shadow: 0 16px 40px rgba(59,42,42,.13); }
+    .card:hover::after { transform: scaleX(1); }
+    .card-icon { font-size: 2.4rem; margin-bottom: 1rem; }
+    .card h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; margin-bottom: .6rem; }
+    .card p { font-size: .88rem; color: #7a6060; line-height: 1.7; font-weight: 300; }
+
+    /* FOUNDER QUOTE */
+    .founder {
+      padding: 6rem 6%;
+      background: linear-gradient(135deg, var(--blush) 0%, var(--cream) 100%);
+      text-align: center;
+    }
+    .founder blockquote {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.3rem, 2.5vw, 2rem);
+      font-style: italic;
+      color: var(--bark);
+      max-width: 800px;
+      margin: 0 auto 2rem;
+      line-height: 1.6;
+      position: relative;
+    }
+    .founder blockquote::before { content: '\201C'; font-size: 5rem; color: var(--rose); opacity: .3; position: absolute; top: -2rem; left: -1rem; font-style: normal; line-height: 1; }
+    .founder-name { font-size: 1.05rem; font-weight: 500; color: var(--rose); }
+    .founder-title { font-size: .85rem; color: #7a6060; margin-top: .3rem; }
+
+    /* DONATE IMPACT */
+    .donate-impact { padding: 6rem 6%; }
+    .donate-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; margin-top: 3rem; }
+    .donate-card { background: var(--white); border-radius: 18px; padding: 2rem 1.4rem; text-align: center; border: 2px solid var(--blush); transition: border-color .3s, transform .3s; }
+    .donate-card:hover { border-color: var(--rose); transform: translateY(-5px); }
+    .donate-card .amount { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--rose); margin-bottom: .4rem; }
+    .donate-card p { font-size: .88rem; color: #7a6060; line-height: 1.6; font-weight: 300; }
+
+    /* CTA */
+    .cta { background: linear-gradient(135deg, var(--deep) 0%, var(--rose) 60%, #d4829a 100%); color: var(--white); padding: 7rem 6%; text-align: center; position: relative; overflow: hidden; }
+    .cta-rings { position: absolute; inset: 0; pointer-events: none; }
+    .cta-ring { position: absolute; border-radius: 50%; border: 1px solid rgba(255,255,255,.1); animation: expand 5s linear infinite; }
+    .cta-ring:nth-child(1) { width: 300px; height: 300px; top: 50%; left: 50%; margin: -150px 0 0 -150px; }
+    .cta-ring:nth-child(2) { width: 500px; height: 500px; top: 50%; left: 50%; margin: -250px 0 0 -250px; animation-delay: -1.7s; }
+    .cta-ring:nth-child(3) { width: 700px; height: 700px; top: 50%; left: 50%; margin: -350px 0 0 -350px; animation-delay: -3.4s; }
+    .cta h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3.2rem); margin-bottom: 1rem; position: relative; }
+    .cta p { font-weight: 300; margin-bottom: 2.8rem; opacity: .9; font-size: 1.05rem; position: relative; }
+    .cta-btns { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; position: relative; }
+    .btn-white { display: inline-block; background: var(--white); color: var(--rose); padding: .9rem 2.6rem; border-radius: 99px; font-size: .95rem; font-weight: 600; text-decoration: none; border: none; cursor: pointer; transition: transform .25s, box-shadow .25s; box-shadow: 0 6px 24px rgba(0,0,0,.2); }
+    .btn-white:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(0,0,0,.3); }
+    .btn-outline-white { display: inline-block; background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,.6); padding: .87rem 2.4rem; border-radius: 99px; font-size: .95rem; font-weight: 500; text-decoration: none; cursor: pointer; transition: all .25s; }
+    .btn-outline-white:hover { background: rgba(255,255,255,.15); transform: translateY(-3px); }
+
+    /* FOOTER */
+    footer { background: #1e1212; color: rgba(255,255,255,.55); padding: 4rem 6% 2rem; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+    .footer-brand { font-family: 'Playfair Display', serif; color: var(--white); font-size: 1.4rem; margin-bottom: .3rem; }
+    .footer-brand span { color: var(--rose); }
+    .footer-reg { font-size: .72rem; letter-spacing: .08em; color: rgba(255,255,255,.35); margin-bottom: .8rem; }
+    .footer-tagline { font-size: .9rem; line-height: 1.7; }
+    .footer-col h5 { color: var(--white); font-size: .83rem; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 1rem; }
+    .footer-col a { display: block; color: rgba(255,255,255,.5); text-decoration: none; font-size: .87rem; margin-bottom: .5rem; transition: color .3s; }
+    .footer-col a:hover { color: var(--rose); }
+    .footer-social { display: flex; gap: .8rem; margin-top: 1rem; }
+    .social-btn { display: inline-flex; align-items: center; gap: .4rem; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.6); text-decoration: none; padding: .45rem 1rem; border-radius: 99px; font-size: .8rem; transition: background .3s, color .3s; }
+    .social-btn:hover { background: var(--rose); color: var(--white); border-color: var(--rose); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.08); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: .82rem; }
+    .footer-heart { color: var(--rose); animation: heartbeat 1.2s ease-in-out infinite; display: inline-block; }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(35px); transition: opacity .8s ease, transform .8s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-left { opacity: 0; transform: translateX(-35px); transition: opacity .8s ease, transform .8s ease; }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+    .reveal-right { opacity: 0; transform: translateX(35px); transition: opacity .8s ease, transform .8s ease; }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+    /* KEYFRAMES */
+    @keyframes fadeUp { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes slideDown { from { opacity:0; transform:translateY(-16px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes floatY { from { transform:translateY(0); } to { transform:translateY(-14px); } }
+    @keyframes pulse { 0%,100%{ opacity:1; transform:scale(1); } 50%{ opacity:.4; transform:scale(.6); } }
+    @keyframes tickerScroll { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+    @keyframes spinSlow { from { transform:rotate(0deg); } to { transform:rotate(360deg); } }
+    @keyframes expand { 0%{ opacity:.5; transform:scale(.7); } 100%{ opacity:0; transform:scale(1.4); } }
+    @keyframes heartbeat { 0%,100%{ transform:scale(1); } 50%{ transform:scale(1.3); } }
+
+    /* RESPONSIVE */
+    @media (max-width:900px) {
+      .hero { grid-template-columns:1fr; gap:2.5rem; }
+      .hero-img-grid { grid-template-rows:170px 170px; }
+      .issue-inner { grid-template-columns:1fr; gap:2.5rem; }
+      .issue-img { order: -1; }
+      .impact { grid-template-columns:repeat(3,1fr); }
+      .photo-grid { grid-template-columns:1fr 1fr; grid-template-rows:220px 220px; }
+      .photo-card-wide { grid-column:span 2; }
+      #about { grid-template-columns:1fr; gap:2.5rem; }
+      .cards { grid-template-columns:1fr 1fr; }
+      .donate-grid { grid-template-columns:1fr 1fr; }
+      .footer-top { grid-template-columns:1fr 1fr; gap:2rem; }
+    }
+    @media (max-width:600px) {
+      .nav-links { display:none; }
+      .impact { grid-template-columns:1fr 1fr; }
+      .impact-item:nth-child(3) { grid-column: span 2; border-right:none; }
+      .photo-grid { grid-template-columns:1fr; grid-template-rows:unset; }
+      .photo-card { height:220px; }
+      .photo-card-wide { grid-column:span 1; }
+      .cards { grid-template-columns:1fr; }
+      .donate-grid { grid-template-columns:1fr 1fr; }
+      .hero-img-grid { grid-template-columns:1fr; grid-template-rows:200px 200px; }
+      .gi-tall { grid-row:span 1; }
+      .footer-top { grid-template-columns:1fr; }
+      .footer-bottom { flex-direction:column; text-align:center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div>
+    <div class="nav-logo">She Can Foundation</div>
+    <div class="nav-reg">Govt. Reg. NGO · Indian Society Act, 1860</div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#mission">Mission</a></li>
+    <li><a href="#issue">Our Work</a></li>
+    <li><a href="https://rzp.io/rzp/shecanfoundation" target="_blank" class="nav-donate">Donate Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-badge"><span class="dot"></span> Govt. Registered NGO · India</div>
+    <h1>Together We<br/><em>Can Change</em><br/>The World</h1>
+    <p class="hero-desc">She Can Foundation is a registered NGO dedicated to uplifting and empowering underprivileged women — through education, training, resources, and dignity. We don't ask for much. Just help us with what you can.</p>
+    <div class="hero-btns">
+      <a href="https://rzp.io/rzp/shecanfoundation" target="_blank" class="btn-primary">Donate Now →</a>
+      <a href="#about" class="btn-outline">Our Story</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-img-grid">
+      <div class="gi gi-tall">
+        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80" alt="Empowered woman"/>
+      </div>
+      <div class="gi">
+        <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80" alt="Women community India"/>
+      </div>
+      <div class="gi">
+        <img src="https://images.unsplash.com/photo-1607748862156-7c548e7e98f4?w=600&q=80" alt="Women education"/>
+      </div>
+    </div>
+    <div class="hero-ribbon">
+      <strong>1,20,000+</strong>
+      Girls Reached
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item">Her Period Shouldn't End Her Education</span>
+    <span class="ticker-item">Empowering Women Across India</span>
+    <span class="ticker-item">Free Sanitary Pads & Dignity Kits</span>
+    <span class="ticker-item">Promoting Gender Equality</span>
+    <span class="ticker-item">Registered Under Indian Society Act 1860</span>
+    <span class="ticker-item">She Can. She Will.</span>
+    <span class="ticker-item">Be The Reason She Dreams Again</span>
+    <span class="ticker-item">Her Period Shouldn't End Her Education</span>
+    <span class="ticker-item">Empowering Women Across India</span>
+    <span class="ticker-item">Free Sanitary Pads & Dignity Kits</span>
+    <span class="ticker-item">Promoting Gender Equality</span>
+    <span class="ticker-item">Registered Under Indian Society Act 1860</span>
+    <span class="ticker-item">She Can. She Will.</span>
+    <span class="ticker-item">Be The Reason She Dreams Again</span>
+  </div>
+</div>
+
+<!-- IMPACT NUMBERS -->
+<div class="impact reveal">
+  <div class="impact-item">
+    <div class="num">1,20,000+</div>
+    <p>Girls Helped Across India</p>
+  </div>
+  <div class="impact-item">
+    <div class="num">1 in 5</div>
+    <p>Girls Drop Out Due to Periods</p>
+  </div>
+  <div class="impact-item">
+    <div class="num">12 Crore+</div>
+    <p>Women Lack Menstrual Hygiene Access</p>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" style="padding: 6rem 6%; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;">
+  <div class="about-img reveal-left">
+    <img src="https://images.unsplash.com/photo-1531545514256-b1400bc00f31?w=800&q=80" alt="She Can Foundation community women"/>
+    <div class="about-badge">
+      <span>Govt.</span>
+      <small>Reg. NGO India</small>
+    </div>
+  </div>
+  <div class="about-content reveal-right">
+    <div class="section-tag">🌱 Who We Are</div>
+    <h2>Global Vision,<br/>Local Action</h2>
+    <p>She Can Foundation is a non-governmental organization registered under the <strong>Indian Society Act, 1860</strong>, dedicated to uplifting and empowering underprivileged women.</p>
+    <p>Our mission is to provide education, training, and resources to help women from marginalized communities overcome obstacles and achieve their full potential. We work to promote gender equality, increase access to healthcare and education, and provide opportunities for economic growth.</p>
+    <p>We work closely with local organizations, governments, and communities to ensure that our programmes are effective and sustainable. Through advocacy campaigns, we raise awareness of women's issues across the globe.</p>
+    <ul class="about-list">
+      <li>Free Sanitary Pads & Awareness Workshops</li>
+      <li>Dignity Kits for Underprivileged Girls</li>
+      <li>Education Support & Resources</li>
+      <li>Healthcare Access Initiatives</li>
+      <li>Advocacy & Gender Equality Campaigns</li>
+    </ul>
+    <a href="https://rzp.io/rzp/shecanfoundation" target="_blank" class="btn-primary">Support Our Mission →</a>
+  </div>
+</section>
+
+<!-- CORE ISSUE SECTION -->
+<section class="issue-section" id="issue">
+  <div class="issue-inner">
+    <div class="issue-text reveal-left">
+      <div class="section-tag">❤️ The Hard Truth</div>
+      <h2>"Her Period Shouldn't End Her Education"</h2>
+      <p>Every month, a 13-year-old girl in a small village is forced to miss five days of school. Not because she doesn't want to learn — but because she cannot afford something as basic as a sanitary pad.</p>
+      <p>She hides at home in shame. She uses rags, newspapers, even sand — risking her health and her dignity. Slowly, her dreams of education, freedom, and self-respect begin to fade.</p>
+      <div class="issue-stats">
+        <div class="issue-stat">
+          <div class="stat-icon">📉</div>
+          <p><strong>1 in every 5 girls</strong> in India drops out of school because of periods.</p>
+        </div>
+        <div class="issue-stat">
+          <div class="stat-icon">🚫</div>
+          <p>Over <strong>12 crore women and girls</strong> in India still lack access to proper menstrual hygiene.</p>
+        </div>
+        <div class="issue-stat">
+          <div class="stat-icon">✅</div>
+          <p>She Can Foundation has already helped <strong>1,20,000+ girls</strong> with free sanitary pads, awareness workshops, and dignity kits.</p>
+        </div>
+      </div>
+    </div>
+    <div class="issue-img reveal-right">
+      <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?w=700&q=80" alt="Women empowerment workshop India"/>
+      <div class="issue-quote">
+        "Without you, she waits. With you, she rises."
+        <br/><br/><strong>— She Can Foundation</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO GALLERY -->
+<section class="gallery-section">
+  <div class="section-header reveal">
+    <div class="section-tag">📸 Our Community</div>
+    <h2>Real Women. Real Change.</h2>
+    <p>Every act of support sends a girl back to school with dignity.</p>
+  </div>
+  <div class="photo-grid reveal">
+    <div class="photo-card photo-card-wide">
+      <img src="https://images.unsplash.com/photo-1484863137850-59afcfe05386?w=900&q=80" alt="Women empowerment"/>
+      <div class="overlay">
+        <div class="overlay-text">
+          <h4>Awareness Workshops</h4>
+          <p>Educating communities across India</p>
+        </div>
+      </div>
+    </div>
+    <div class="photo-card">
+      <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80" alt="Women community support"/>
+      <div class="overlay">
+        <div class="overlay-text">
+          <h4>Dignity Kits Distribution</h4>
+          <p>Free sanitary pads for girls in need</p>
+        </div>
+      </div>
+    </div>
+    <div class="photo-card photo-card-wide">
+      <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=900&q=80" alt="Women together"/>
+      <div class="overlay">
+        <div class="overlay-text">
+          <h4>Community Outreach</h4>
+          <p>Reaching girls in villages across India</p>
+        </div>
+      </div>
+    </div>
+    <div class="photo-card">
+      <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&q=80" alt="Empowered woman"/>
+      <div class="overlay">
+        <div class="overlay-text">
+          <h4>She Rises</h4>
+          <p>With your support, she dreams again</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION CARDS -->
+<section class="mission" id="mission">
+  <div class="section-header reveal">
+    <div class="section-tag">✦ What We Do</div>
+    <h2>Our Programmes & Initiatives</h2>
+    <p>Every programme is designed to create lasting, meaningful change in women's lives.</p>
+  </div>
+  <div class="cards">
+    <div class="card reveal">
+      <div class="card-icon">🩺</div>
+      <h3>Menstrual Hygiene</h3>
+      <p>Free sanitary pads, dignity kits, and awareness workshops for underprivileged girls across India — because her period shouldn't end her education.</p>
+    </div>
+    <div class="card reveal">
+      <div class="card-icon">📚</div>
+      <h3>Education Support</h3>
+      <p>Resources and initiatives to keep girls in school and women equipped with skills for economic independence and a better future.</p>
+    </div>
+    <div class="card reveal">
+      <div class="card-icon">🗣️</div>
+      <h3>Advocacy & Awareness</h3>
+      <p>Campaigns and initiatives that raise awareness of women's issues, challenge gender inequality, and amplify women's voices where it counts.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DONATE IMPACT -->
+<section class="donate-impact">
+  <div class="section-header reveal">
+    <div class="section-tag">💛 Your Impact</div>
+    <h2>One Small Gift = A Lifetime of Dignity</h2>
+    <p>See exactly what your donation does for a girl in need.</p>
+  </div>
+  <div class="donate-grid reveal">
+    <div class="donate-card">
+      <div class="amount">₹500</div>
+      <p>Provides <strong>5 girls</strong> with sanitary pads for 1 month</p>
+    </div>
+    <div class="donate-card">
+      <div class="amount">₹1,500</div>
+      <p>Provides <strong>15 girls</strong> with sanitary pads for 3 months</p>
+    </div>
+    <div class="donate-card">
+      <div class="amount">₹5,000</div>
+      <p>Helps <strong>25 girls</strong> continue school with dignity</p>
+    </div>
+    <div class="donate-card">
+      <div class="amount">₹10,000</div>
+      <p>Keeps an <strong>entire classroom</strong> free from shame</p>
+    </div>
+  </div>
+  <div style="text-align:center; margin-top: 3rem;">
+    <a href="https://rzp.io/rzp/shecanfoundation" target="_blank" class="btn-primary">Donate Now — Be The Change</a>
+  </div>
+</section>
+
+<!-- FOUNDER QUOTE -->
+<section class="founder reveal">
+  <div class="section-tag">👤 Founder & President</div>
+  <blockquote>
+    Together, we can break down barriers and empower women. At She Can Foundation, we believe that if we all do our part, there is no challenge too great to overcome. Join us in our mission to create a world where every woman has the opportunity to thrive and succeed.
+  </blockquote>
+  <div class="founder-name">Reeta Mishra</div>
+  <div class="founder-title">Founder & President, She Can Foundation</div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="cta">
+  <div class="cta-rings">
+    <div class="cta-ring"></div>
+    <div class="cta-ring"></div>
+    <div class="cta-ring"></div>
+  </div>
+  <h2>Be the Reason She Dreams Again</h2>
+  <p>Whether you donate, volunteer, or simply spread the word — every action counts.<br/>For every 1 girl we reach, 5 more are still waiting. Join us today.</p>
+  <div class="cta-btns">
+    <a href="https://rzp.io/rzp/shecanfoundation" target="_blank" class="btn-white">Donate Now</a>
+    <a href="mailto:president@shecanfoundation.org" class="btn-outline-white">Join Our Team →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand">She <span>Can</span> Foundation</div>
+      <div class="footer-reg">Registered under the Indian Society Act, 1860</div>
+      <p class="footer-tagline">Dedicated to uplifting and empowering underprivileged women through education, training, resources, and dignity. Because she can — and she will.</p>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/_shecanfoundation_" target="_blank" class="social-btn">📸 Instagram</a>
+        <a href="https://www.linkedin.com/company/shecanfoundation" target="_blank" class="social-btn">💼 LinkedIn</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Quick Links</h5>
+      <a href="#about">About Us</a>
+      <a href="#mission">Our Programmes</a>
+      <a href="#issue">Our Work</a>
+      <a href="https://shecanfoundation.org/our-certificate" target="_blank">Our Certificate</a>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <a href="mailto:president@shecanfoundation.org">president@shecanfoundation.org</a>
+      <a href="tel:+918283841830">+91 82838 41830</a>
+      <a href="https://rzp.io/rzp/shecanfoundation" target="_blank">Donate Online</a>
+      <a href="https://shecanfoundation.org" target="_blank">shecanfoundation.org</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 She Can Foundation. All rights reserved. | Govt. Reg. NGO</span>
+    <span>Made with <span class="footer-heart">♥</span> for women everywhere</span>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const els = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  els.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
