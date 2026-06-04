@@ -45,5 +45,4 @@ awareness workshops across India.
 - 📞 Phone: +91 82838 41830
 
 ## 👩‍💻 Developed By
-[Your Name] — Frontend Development Intern  
-She Can Foundation Internship Task, 2025
+❤️ Kanika Shamra
