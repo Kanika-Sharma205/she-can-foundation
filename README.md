@@ -7,7 +7,7 @@ a Government-registered NGO (Indian Society Act, 1860) dedicated to
 empowering underprivileged women across India.
 
 ## 🌐 Live Demo
-[Click here to view the live website](#) <!-- paste your live link here -->
+[Click here to view the live website](https://kanika-sharma205.github.io/she-can-foundation/)
 
 ## 🛠️ Built With
 - HTML5
